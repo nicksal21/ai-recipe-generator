@@ -9,7 +9,7 @@ import outputs from '../amplify_outputs.json';
 import { Schema } from "../amplify/data/resource";
 
 Amplify.configure(outputs);
-const client = generateClient<Schema>({ authMode: "userPool" });
+generateClient<Schema>({ authMode: "userPool" });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Flex, TextAreaField, Loader, Text, View, Button } from "@aws-amplify/ui-react"
+import { TextAreaField, Button } from "@aws-amplify/ui-react"
 import { BedrockRuntimeClient, InvokeModelCommand } from "@aws-sdk/client-bedrock-runtime";
 import '@aws-amplify/ui-react/styles.css';
 import ReactMarkdown from "react-markdown";
@@ -24,9 +24,12 @@ export default function App() {
     const input = {
       body: new TextEncoder().encode(JSON.stringify({
         anthropic_version: "bedrock-2023-05-31",
-        max_tokens: 512,
+        max_tokens: 1024,
         messages: [
-          { role: "user", content: `Create a recipe given the following ingredients: ${description}` }
+          { role: "user", content: `Create a recipe given the following description: ${description}.
+          Always start with a title, then the serving size, then list the ingredients, and finally provide the instructions.
+          Use markdown formatting with headings for each section.
+          Do not provide any follow up after the recipe.` }
         ]
       })),
       contentType: "application/json",
